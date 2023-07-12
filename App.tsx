@@ -15,7 +15,7 @@ export default function App() {
     background : "#f5f5f5",
     text:"#191919",
     border:"#D9D9D9",
-    Primary:"#i91919"
+    primary:"#191919",
     
    },
    

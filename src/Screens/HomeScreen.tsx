@@ -5,16 +5,27 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  FlatList,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
+
+const Categories = [
+  "Clothing",
+  "Shoes",
+  "Accessories",
+  "Accessories 2",
+  "Accessories 3",
+  "Accessories 4",
+];
 
 const AVATAR_URL = "https://clipart-library.com/images/ATbrxjpyc.jpg";
 
 const HomeScreen = () => {
   const { colors } = useTheme();
+  const [categoryIndex, setCategoryIndex] = useState(0);
   return (
     <ScrollView>
       <SafeAreaView style={{ paddingVertical: 24, gap: 24 }}>
@@ -145,6 +156,41 @@ const HomeScreen = () => {
             </View>
           </View>
         </View>
+        {/* category section */}
+        <FlatList
+          data={Categories}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            gap: 12,}}
+          renderItem={({ item, index }) => {
+            const isSelected = categoryIndex === index;
+
+            return (
+              <TouchableOpacity onPress={()=> setCategoryIndex(index)}
+                style={{
+                  backgroundColor: isSelected ? colors.primary : colors.card,
+                  paddingHorizontal: 20,
+                  paddingVertical: 12,
+                  borderRadius: 100,
+                  borderWidth: isSelected ? 0 : 1,
+                  borderColor: colors.border,
+                }}
+              >
+                <Text
+                  style={{ color: isSelected ? colors.background : colors.text,
+                    fontWeight: "600",
+                    fontSize: 14,
+                    opacity: isSelected ? 1 : 0.5,
+                  }}
+                >
+                  {item}
+                </Text>
+              </TouchableOpacity>
+            );
+          }}
+        />
       </SafeAreaView>
     </ScrollView>
   );
@@ -177,16 +223,15 @@ const Card = () => {
         }}
       />
       <View
-      style={{
-        position:"absolute",
-        top:16,
-        left:16,
-        paddingHorizontal:16,
-        paddingVertical:12,
-        backgroundColor: "rgba(0,0,0,0.25)",
-        borderRadius:100
-      }}
-      
+        style={{
+          position: "absolute",
+          top: 16,
+          left: 16,
+          paddingHorizontal: 16,
+          paddingVertical: 12,
+          backgroundColor: "rgba(0,0,0,0.25)",
+          borderRadius: 100,
+        }}
       >
         <Text style={{ fontSize: 14, fontWeight: "500", color: "#fff" }}>
           130$
