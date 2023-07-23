@@ -11,6 +11,7 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
+import MasonryList from "reanimated-masonry-list";
 
 const Categories = [
   "Clothing",
@@ -163,12 +164,14 @@ const HomeScreen = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={{
             paddingHorizontal: 16,
-            gap: 12,}}
+            gap: 12,
+          }}
           renderItem={({ item, index }) => {
             const isSelected = categoryIndex === index;
 
             return (
-              <TouchableOpacity onPress={()=> setCategoryIndex(index)}
+              <TouchableOpacity
+                onPress={() => setCategoryIndex(index)}
                 style={{
                   backgroundColor: isSelected ? colors.primary : colors.card,
                   paddingHorizontal: 20,
@@ -179,7 +182,8 @@ const HomeScreen = () => {
                 }}
               >
                 <Text
-                  style={{ color: isSelected ? colors.background : colors.text,
+                  style={{
+                    color: isSelected ? colors.background : colors.text,
                     fontWeight: "600",
                     fontSize: 14,
                     opacity: isSelected ? 1 : 0.5,
@@ -191,6 +195,23 @@ const HomeScreen = () => {
             );
           }}
         />
+        {/* //masonry */}
+        <MasonryList
+  data={[23,34,56,78,90]}
+  keyExtractor={(item): string => item}
+  numColumns={2}
+  showsVerticalScrollIndicator={false}
+  renderItem={({item}) => (
+    <View>
+    <Text>Hello</Text>
+  </View>
+  )
+  }
+ 
+
+  onEndReachedThreshold={0.1}
+  
+/>
       </SafeAreaView>
     </ScrollView>
   );

@@ -6,6 +6,8 @@ import {DefaultTheme, NavigationContainer, Theme} from "@react-navigation/native
 import RootNavigator from './src/Navigators/RootNavigator';
 import { useMemo } from 'react';
 import { color } from 'react-native-reanimated';
+import 'react-native-gesture-handler';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 // import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
@@ -25,7 +27,7 @@ export default function App() {
  []
  );
   return (
-    <View style={styles.container}>
+    <GestureHandlerRootView style={styles.container}>
      <NavigationContainer theme={theme}>
    
       
@@ -35,7 +37,7 @@ export default function App() {
                 {/* <Icon name="add-to-queue-button" color="red" /> */}
 
             </NavigationContainer>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
