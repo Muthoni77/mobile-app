@@ -11,7 +11,8 @@ import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
-import MasonryList from "reanimated-masonry-list";
+import MasonryList from "@react-native-seoul/masonry-list";
+// import MasonryList from 'reanimated-masonry-list';
 
 const Categories = [
   "Clothing",
@@ -168,7 +169,6 @@ const HomeScreen = () => {
           }}
           renderItem={({ item, index }) => {
             const isSelected = categoryIndex === index;
-
             return (
               <TouchableOpacity
                 onPress={() => setCategoryIndex(index)}
@@ -195,23 +195,37 @@ const HomeScreen = () => {
             );
           }}
         />
-        {/* //masonry */}
-        <MasonryList
-  data={[23,34,56,78,90]}
-  keyExtractor={(item): string => item}
-  numColumns={2}
-  showsVerticalScrollIndicator={false}
-  renderItem={({item}) => (
-    <View>
-    <Text>Hello</Text>
-  </View>
-  )
-  }
- 
-
-  onEndReachedThreshold={0.1}
-  
-/>
+        {/* masonry */}
+        <View style={{}}>
+          <MasonryList
+            data={[1, 2, 3, 4, 5, 45, 67, 67]}
+        
+            keyExtractor={(item): string => item}
+            numColumns={2}
+            contentContainerStyle={{ paddingHorizontal: 24}}
+            showsVerticalScrollIndicator={false}
+            renderItem={({ item, i }) => (
+              <View
+                style={{
+                  aspectRatio: i === 0 ? 1 : 2 / 3,
+                  position: "relative",
+                  overflow: "hidden",
+                  backgroundColor: "red",
+                  marginTop: 12,
+                }}
+              >
+                <Image
+                  source={{
+                    uri: "https://img.freepik.com/free-photo/black-woman-trendy-grey-leather-jacket-posing-beige-background-studio-winter-autumn-fashion-look_273443-141.jpg",
+                  }}
+                  resizeMode="cover"
+                  style={StyleSheet.absoluteFill}
+                />
+              </View>
+            )}
+            onEndReachedThreshold={0.1}
+          />
+        </View>
       </SafeAreaView>
     </ScrollView>
   );
