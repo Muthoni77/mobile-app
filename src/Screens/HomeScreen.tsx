@@ -12,7 +12,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
 import MasonryList from "@react-native-seoul/masonry-list";
-// import MasonryList from 'reanimated-masonry-list';
+import { color } from "react-native-reanimated";
+import { BlurView } from 'expo-blur';
+
 
 const Categories = [
   "Clothing",
@@ -199,10 +201,9 @@ const HomeScreen = () => {
         <View style={{}}>
           <MasonryList
             data={[1, 2, 3, 4, 5, 45, 67, 67]}
-        
             keyExtractor={(item): string => item}
             numColumns={2}
-            contentContainerStyle={{ paddingHorizontal: 24}}
+            contentContainerStyle={{ paddingHorizontal: 24 }}
             showsVerticalScrollIndicator={false}
             renderItem={({ item, i }) => (
               <View
@@ -212,15 +213,51 @@ const HomeScreen = () => {
                   overflow: "hidden",
                   backgroundColor: "red",
                   marginTop: 12,
+                  marginLeft: 12,
+                  borderRadius: 24,
                 }}
               >
                 <Image
                   source={{
-                    uri: "https://img.freepik.com/free-photo/black-woman-trendy-grey-leather-jacket-posing-beige-background-studio-winter-autumn-fashion-look_273443-141.jpg",
+                    uri: "https://www.whitehouseblackmarket.com/Product_Images/570349062_190.jpg?imgPolicy=productMed",
                   }}
                   resizeMode="cover"
                   style={StyleSheet.absoluteFill}
                 />
+                <View style={{ flexDirection: "row", padding: 16 ,gap:8}}>
+                  <Text
+                    style={{
+                      flex: 1,
+                      fontSize: 16,
+                      fontWeight: "600",
+                      color: colors.text,
+                    }}
+                  >
+                    PUMA everyday hustle
+                  </Text>
+                  <View
+                    style={{
+                      borderRadius: 100,
+                      height: 32,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      backgroundColor: colors.background,
+                      aspectRatio:1,
+                    }}
+                  >
+                    <Icons 
+                    name="favorite-border"
+                    size={20}
+                    color={colors.text}
+                    />
+                  </View>
+                </View>
+                <View style={{flex:1}}>
+                  <BlurView style={{flexDirection : "row",backgroundColor:colors.background, alignItems:'center'}} intensity={20} >
+
+                  </BlurView>
+
+                    </View>
               </View>
             )}
             onEndReachedThreshold={0.1}
