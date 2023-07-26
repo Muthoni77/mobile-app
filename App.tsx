@@ -11,6 +11,7 @@ import { useMemo } from "react";
 import { color } from "react-native-reanimated";
 import "react-native-gesture-handler";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 // import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
@@ -30,7 +31,9 @@ export default function App() {
   return (
     <GestureHandlerRootView style={styles.container}>
       <NavigationContainer theme={theme}>
+        <BottomSheetModalProvider>
         <RootNavigator />
+        </BottomSheetModalProvider>
         <StatusBar style="dark" />
         {/* <Icon name="add-to-queue-button" color="red" /> */}
       </NavigationContainer>
