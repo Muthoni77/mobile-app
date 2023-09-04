@@ -7,14 +7,17 @@ import {
   StyleSheet,
   FlatList,
 } from "react-native";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/MaterialIcons";
 import MasonryList from "@react-native-seoul/masonry-list";
 import { color } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
-import { BottomSheetModal} from "@gorhom/bottom-sheet";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import CustomBackdrop from "../Components/CustomBackdrop";
+// import CustomBackdrop from "../components/CustomBackdrop";
+// import FilterView from "../components/FilterView";
 
 const Categories = [
   "Clothing",
@@ -60,21 +63,34 @@ const MESONARY_LIST_DATA = [
   },
 ];
 
-
+// const HomeScreen = ({ navigation }) => {
 const HomeScreen = () => {
   const { colors } = useTheme();
   const [categoryIndex, setCategoryIndex] = useState(0);
-    // ref
+  // ref
   // callbacks
   // const OpenFilterModal = useCallback(() => {
   //   bottomSheetModalRef.current?.present();
   // }, []);
-  const openFilterModal = useCallback(() => {
+  // const openFilterModal = useCallback(() => {
+  //   bottomSheetModalRef.current?.present();
+  // }, []);
+
+  //   const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  // ref
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+
+  // variables
+  const snapPoints = useMemo(() => ["25%", "50%"], []);
+
+  // callbacks
+  const handlePresentModalPress = useCallback(() => {
     bottomSheetModalRef.current?.present();
   }, []);
+  const handleSheetChanges = useCallback((index: number) => {
+    console.log("handleSheetChanges", index);
+  }, []);
 
- 
-    const bottomSheetModalRef = useRef<BottomSheetModal>(null);
   return (
     <ScrollView>
       <SafeAreaView style={{ paddingVertical: 24, gap: 24 }}>
@@ -159,8 +175,9 @@ const HomeScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            // onPress={openFilterModal}
-            onPress={openFilterModal}
+            onPress={handlePresentModalPress}
+            // onPress={() => navigation.navigate("cart")}
+
             style={{
               width: 52,
               aspectRatio: 1,
@@ -208,46 +225,45 @@ const HomeScreen = () => {
         </View>
         {/* Categories Section */}
         <View>
-        <FlatList
-          data={Categories}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{
-            paddingHorizontal: 16,
-            gap: 12,
-          }}
-          renderItem={({ item, index }) => {
-            const isSelected = categoryIndex === index;
-            return (
-              <TouchableOpacity
-                onPress={() => setCategoryIndex(index)}
-                style={{
-                  backgroundColor: isSelected ? colors.primary : colors.card,
-                  paddingHorizontal: 20,
-                  paddingVertical: 12,
-                  borderRadius: 100,
-                  borderWidth: isSelected ? 0 : 1,
-                  borderColor: colors.border,
-                }}
-              >
-                <Text
+          <FlatList
+            data={Categories}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              paddingHorizontal: 16,
+              gap: 12,
+            }}
+            renderItem={({ item, index }) => {
+              const isSelected = categoryIndex === index;
+              return (
+                <TouchableOpacity
+                  onPress={() => setCategoryIndex(index)}
                   style={{
-                    color: isSelected ? colors.background : colors.text,
-                    fontWeight: "600",
-                    fontSize: 14,
-                    opacity: isSelected ? 1 : 0.5,
+                    backgroundColor: isSelected ? colors.primary : colors.card,
+                    paddingHorizontal: 20,
+                    paddingVertical: 12,
+                    borderRadius: 100,
+                    borderWidth: isSelected ? 0 : 1,
+                    borderColor: colors.border,
                   }}
                 >
-                  {item}
-                </Text>
-              </TouchableOpacity>
-            );
-          }}
-        />
-
-</View>
+                  <Text
+                    style={{
+                      color: isSelected ? colors.background : colors.text,
+                      fontWeight: "600",
+                      fontSize: 14,
+                      opacity: isSelected ? 1 : 0.5,
+                    }}
+                  >
+                    {item}
+                  </Text>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </View>
         {/* masonry */}
-        
+
         <MasonryList
           data={MESONARY_LIST_DATA}
           numColumns={2}
@@ -353,27 +369,24 @@ const HomeScreen = () => {
           )}
           onEndReachedThreshold={0.1}
         />
-        
       </SafeAreaView>
 
-  
-       <BottomSheetModal
-        snapPoints={["75%"]}
+      <BottomSheetModal
+        snapPoints={["85%"]}
         index={0}
         ref={bottomSheetModalRef}
-        // backdropComponent={(props) => <CustomBackdrop {...props} />}
-        // backgroundStyle={{
-        //   borderRadius: 24,
-        //   backgroundColor: colors.card,
-        // }}
-        // handleIndicatorStyle={{
-        //   backgroundColor: colors.primary,
-        // }}
+        backdropComponent={(props) => <CustomBackdrop {...props} />}
+        backgroundStyle={{
+          borderRadius: 24,
+          backgroundColor: colors.card,
+        }}
+        handleIndicatorStyle={{
+          backgroundColor: colors.primary,
+        }}
       >
-       <View style={{flex:1}}>
-            <Text>Awesome 🎉</Text>
-          </View>
-        {/* <FilterView /> */}
+        <View>
+          <Text>Hey HEt</Text>
+        </View>
       </BottomSheetModal>
     </ScrollView>
   );

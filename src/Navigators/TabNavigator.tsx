@@ -28,7 +28,7 @@ const TabsNavigator = () => {
          }}/>
       <TabsStack.Screen name ="cart" component={Example}
         options={{
-          headerShown: false,
+          // headerShown: false,
           tabBarIcon(props){
             return <Icons name='cases' {...props}/>
           },
