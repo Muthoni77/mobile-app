@@ -10,13 +10,14 @@ import { BlurView } from "expo-blur";
 const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 const CustomBackdrop = ({ animatedIndex, style }: BottomSheetBackdropProps) => {
   // animated variables
+
   const containerAnimatedStyle = useAnimatedStyle(() => ({
-    opacity: interpolate(
+    backgroundColor: `rgba(0,0,0,${interpolate(
       animatedIndex.value,
       [-1, 0],
       [0, 0.5],
       Extrapolate.CLAMP
-    ),
+    )})`,
   }));
 
   // styles

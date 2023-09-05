@@ -16,6 +16,7 @@ import { color } from "react-native-reanimated";
 import { BlurView } from "expo-blur";
 import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import CustomBackdrop from "../Components/CustomBackdrop";
+import FilterView from "../Components/FilterView";
 // import CustomBackdrop from "../components/CustomBackdrop";
 // import FilterView from "../components/FilterView";
 
@@ -384,9 +385,7 @@ const HomeScreen = () => {
           backgroundColor: colors.primary,
         }}
       >
-        <View>
-          <Text>Hey HEt</Text>
-        </View>
+        <FilterView />
       </BottomSheetModal>
     </ScrollView>
   );
