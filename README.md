@@ -9,3 +9,6 @@
   > Upon project creation, the ".expo" folder is already added to your ".gitignore" file.
 
 ![homepage](assets/Home.jpg)
+
+![homepage2](assets/home2.jpg)
+<img >
