@@ -216,11 +216,35 @@ const HomeScreen = () => {
                 flex: 1,
               }}
             >
-              <Card />
+              <Card
+                onPress={() => {
+                  navigation.navigate("Details", {
+                    id: "123",
+                  });
+                }}
+                price={130}
+                imageUrl="https://iwantyoutoknow.co.uk/wp-content/uploads/2018/03/new-combo3.jpg"
+              />
             </View>
             <View style={{ flex: 1, gap: 12 }}>
-              <Card />
-              <Card />
+              <Card
+                onPress={() => {
+                  navigation.navigate("Details", {
+                    id: "123",
+                  });
+                }}
+                price={130}
+                imageUrl="https://iwantyoutoknow.co.uk/wp-content/uploads/2018/03/new-combo3.jpg"
+              />
+              <Card
+                onPress={() => {
+                  navigation.navigate("Details", {
+                    id: "123",
+                  });
+                }}
+                price={130}
+                imageUrl="https://iwantyoutoknow.co.uk/wp-content/uploads/2018/03/new-combo3.jpg"
+              />
             </View>
           </View>
         </View>
@@ -385,7 +409,7 @@ const HomeScreen = () => {
           backgroundColor: colors.primary,
         }}
       >
-        <FilterView />
+        {/* <FilterView /> */}
       </BottomSheetModal>
     </ScrollView>
   );
@@ -393,9 +417,18 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const Card = () => {
+const Card = ({
+  price,
+  imageUrl,
+  onPress,
+}: {
+  price: number;
+  imageUrl: string;
+  onPress?: () => void;
+}) => {
   return (
-    <View
+    <TouchableOpacity
+      onPress={onPress}
       style={{
         flex: 1,
         position: "relative",
@@ -406,7 +439,7 @@ const Card = () => {
       <Image
         // source={require("../assets/images/download.jpeg")}
         source={{
-          uri: "https://iwantyoutoknow.co.uk/wp-content/uploads/2018/03/new-combo3.jpg",
+          uri: imageUrl,
         }}
         resizeMode="cover"
         style={{
@@ -432,6 +465,6 @@ const Card = () => {
           130$
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
